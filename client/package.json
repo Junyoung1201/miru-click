@@ -7,7 +7,7 @@
     "scripts": {
         "start": "cls && vite",
         "build": "cls && vite build",
-        "deploy": "gh-pages -d build"
+        "deploy": "npm run build && gh-pages -d build"
     },
     "author": "",
     "license": "ISC",

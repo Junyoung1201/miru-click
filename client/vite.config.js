@@ -5,7 +5,7 @@ export default defineConfig({
     plugins: [react()],
     base: '/miru-click/',
     server: {
-        port: 3000,
+        port: 3025,
         open: false,
     },
     build: {
