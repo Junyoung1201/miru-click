@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './app.css';
-import './background.css';
 
 ReactDOM.createRoot(document.querySelector("#root")!).render(<App />)
 
@@ -33,10 +32,10 @@ function App() {
             setOpen(false);
         };
 
-        window.addEventListener("mouseleave", onMouseLeave);
+        window.addEventListener("pointerleave", onMouseLeave);
 
         return () => {
-            window.removeEventListener("mouseleave", onMouseLeave);
+            window.removeEventListener("pointerleave", onMouseLeave);
         };
     }, [])
 
@@ -146,8 +145,7 @@ function App() {
         <div className='my-click' ref={myClickRef}>{myClick}</div>
 
         <div className='miru-holder'>
-            <div id='miru' onMouseDown={openMiru} onMouseUp={closeMiru} data-open={open}>
-                
+            <div id='miru' onPointerDown={openMiru} onPointerUp={closeMiru} data-open={open}>
                 <img src={open ? "img/miru-2.png" : "img/miru-idle.png"} alt='미루 이미지' />
             </div>
         </div>

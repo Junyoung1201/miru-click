@@ -1,15 +1,30 @@
+@font-face {
+    font-family: 'Katuri';
+    src: url('https://gcore.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 img {
     pointer-events: none;
 }
 
+html,body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    overscroll-behavior: none;
+}
+
 body {
+    position: relative;
+    z-index: 1;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-drag: none;
-    overflow: hidden;
 
     background:
-        url('./img/star.png') repeat,
+        url('/img/star.png') repeat,
         linear-gradient(90deg, #EDE4FF 0%, #FFC4E8 100%);
     animation: move-stars 60s linear infinite;
 }
@@ -41,6 +56,7 @@ div.bg-blur {
 }
 
 div.my-click {
+    font-family: Katuri;
     --border-color: black;
 
     position: absolute;
@@ -49,7 +65,7 @@ div.my-click {
     transform: translateX(-50%);
     transform-origin: center left;
 
-    font-size: 55px;
+    font-size: 60px;
     font-weight: bold;
     color: white;
     text-shadow:
@@ -63,6 +79,7 @@ div.my-click {
         0px 3px 0 var(--border-color);
 
     text-align: center;
+    pointer-events: none;
     z-index: 1;
 }
 
@@ -88,6 +105,7 @@ div#miru {
     align-items: center;
 
     height: 100%;
+    min-height: 565px;
 
     img {
         transition: height 0.3s ease;
@@ -95,7 +113,7 @@ div#miru {
     }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
     div.miru-holder {
         margin-left: 0px;
     }
@@ -104,7 +122,63 @@ div#miru {
         width: 100%;
 
         img {
+            height: 90%;
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    div#miru {
+        width: 100%;
+
+        img {
             height: 70%;
         }
+    }
+}
+
+@media (max-width: 500px) {
+
+    div#miru {
+        width: 100%;
+
+        img {
+            height: 60%;
+        }
+    }
+}
+
+@media (max-width: 400px) {
+
+    div.miru-holder {
+        margin-left: 70px;
+    }
+
+    div#miru {
+        width: 100%;
+
+        img {
+            height: 70%;
+        }
+    }
+}
+
+@media (max-height: 350px) {
+    div.miru-holder {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: -100px;
+        margin-top: -100px;
+    }
+
+    div#miru {
+        height: 200%;
+    }
+
+    div.my-click {
+        position: absolute;
+        text-align: left;
+        font-size: 130px;
     }
 }
