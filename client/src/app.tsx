@@ -147,6 +147,7 @@ function App() {
 
         <div className='miru-holder'>
             <div id='miru' onMouseDown={openMiru} onMouseUp={closeMiru} data-open={open}>
+                
                 <img src={open ? "img/miru-2.png" : "img/miru-idle.png"} alt='미루 이미지' />
             </div>
         </div>
