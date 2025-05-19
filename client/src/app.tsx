@@ -13,6 +13,11 @@ function App() {
     const comboResetTimer = useRef<NodeJS.Timeout>(null);
     const [combo, setCombo] = useState<number>(1);
 
+    // 이미지 프리로드
+    useEffect(() => {
+        new Image().src = "./img/miru-2.png";
+    },[])
+
     // BGM 시작
     useEffect(() => {
         let bgm = new Audio("bgm.mp3");
