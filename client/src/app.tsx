@@ -12,11 +12,37 @@ function App() {
     const myClickRef = useRef<HTMLDivElement>(null);
     const comboResetTimer = useRef<NodeJS.Timeout>(null);
     const [combo, setCombo] = useState<number>(1);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | undefined>();
 
     // 이미지 프리로드
+    async function loadImage() {
+        for (let img of ["miru-idle.png", "miru-2.png"]) {
+            let promise = new Promise((resolve, reject) => {
+                let _img = new Image();
+                _img.src = `./img/${img}`;
+                _img.onload = () => {
+                    resolve(null);
+                }
+                _img.onerror = (error) => {
+                    console.error(error);
+                    setError(`이미지를 로드하지 못했어요.`);
+                    setLoading(false);
+                    reject(error);
+                };
+            })
+
+            await promise;
+            console.log(`${img} 프리로드`);
+        }
+
+        setTimeout(() => {
+            setLoading(false);
+        }, 200)
+    }
     useEffect(() => {
-        new Image().src = "./img/miru-2.png";
-    },[])
+        loadImage();
+    }, [])
 
     // BGM 시작
     useEffect(() => {
@@ -149,10 +175,19 @@ function App() {
         {/* <button onClick={() => createMyClickPop("100", 1)}>테스트</button> */}
         <div className='my-click' ref={myClickRef}>{myClick}</div>
 
-        <div className='miru-holder'>
-            <div id='miru' onPointerDown={openMiru} onPointerUp={closeMiru} data-open={open}>
-                <img src={open ? "img/miru-2.png" : "img/miru-idle.png"} alt='미루 이미지' />
+        {
+            error === undefined &&
+            <div className='miru-holder'>
+                <div id='miru' onPointerDown={openMiru} onPointerUp={closeMiru} data-open={open}>
+                    <img src={open ? "img/miru-2.png" : "img/miru-idle.png"} alt='미루 이미지' />
+                </div>
             </div>
+        }
+
+        <div className='loading' data-loading={loading} />
+        <div className='error' data-has-error={error !== undefined}>
+            <div className='title'>오류!</div>
+            <div className='content'>{error}</div>
         </div>
     </>
 }
